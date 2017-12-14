@@ -120,33 +120,75 @@ namespace gxy.controls
         private void _masktextbox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
 
-            if (((MaskedTextBox)sender).SelectionStart == 0 || ((MaskedTextBox)sender).SelectionStart == 10)
-                return;
-
-            if (_masktextbox.SelectedText.Count() > 1)
+           if(date is null)
             {
-                _masktextbox.SelectionLength = 1;
-
+                return;
             }
 
+            // For MultiSelect Case
+            if (((MaskedTextBox)sender).SelectionLength > 0 )
+                {
+                    int _selectionStart = ((MaskedTextBox)sender).SelectionStart;
+                    int _selectionlength = ((MaskedTextBox)sender).SelectionLength;
+
+
+                    for (int i = 0; i < _selectionlength; i++)
+                    {
+                        
+                        date = date.Insert(_selectionStart, " ");
+                        date = date.Remove(_selectionStart + 1, 1);
+                        _selectionStart += 1;
+                    }
+                    return;
+
+                }
 
             #region Logic For BackSpace Key And Delete Key
             if (e.Key == Key.Back)
             {
+                if (((MaskedTextBox)sender).SelectionStart == 0)
+                    return;
+
+
                 if (date.ToCharArray()[((MaskedTextBox)sender).SelectionStart - 1].ToString() == " ")
                 {
                     return;
                 }
                 else if (date.ToCharArray()[((MaskedTextBox)sender).SelectionStart - 1].ToString() != "/")
                 {
-                    date = date.Insert(((MaskedTextBox)sender).SelectionStart - 1, " ");
-                    date = date.Remove(((MaskedTextBox)sender).SelectionStart, 1);
+                    
+
+                    if(((MaskedTextBox)sender).SelectionLength==0)
+                    {
+                        date = date.Insert(((MaskedTextBox)sender).SelectionStart - 1, " ");
+                        date = date.Remove(((MaskedTextBox)sender).SelectionStart, 1);
+                    }
                 }
                 else
                 {
 
-                    date = date.Insert(((MaskedTextBox)sender).SelectionStart - 2, " ");
-                    date = date.Remove(((MaskedTextBox)sender).SelectionStart - 1, 1);
+                    if (((MaskedTextBox)sender).SelectionLength == 0)
+                    {
+                        date = date.Insert(((MaskedTextBox)sender).SelectionStart - 2, " ");
+                        date = date.Remove(((MaskedTextBox)sender).SelectionStart - 1, 1);
+                    }
+                    else
+                    {
+                        int _selectionStart = ((MaskedTextBox)sender).SelectionStart;
+                        int _selectionlength = ((MaskedTextBox)sender).SelectionLength;
+
+                        for (int i = 0; i < _selectionlength; i++)
+                        {
+                            
+                            date = date.Insert(_selectionStart, " ");
+                            date = date.Remove(_selectionStart + 1, 1);
+                            _selectionStart += 1;
+                        }
+
+                    }
+
+
+
 
                 }
                 e.Handled = true;
