@@ -10,7 +10,9 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel>
-            <galaxycontrol:gxydatepicker></galaxycontrol:gxydatepicker>
+            <galaxycontrol:gxydatepicker Margin="5"></galaxycontrol:gxydatepicker>
+            <galaxycontrol:gxydatepicker Margin="5"></galaxycontrol:gxydatepicker>
+            <galaxycontrol:gxydatepicker Margin="5"></galaxycontrol:gxydatepicker>
         </StackPanel>
     </Grid>
 </Window>

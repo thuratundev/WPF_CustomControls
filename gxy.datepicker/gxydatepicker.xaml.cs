@@ -134,11 +134,19 @@ namespace gxy.controls
 
                     for (int i = 0; i < _selectionlength; i++)
                     {
-                        
+                    
+                    if(date.ToCharArray()[_selectionStart].ToString() != "/")
+                    {
                         date = date.Insert(_selectionStart, " ");
                         date = date.Remove(_selectionStart + 1, 1);
+                    }
                         _selectionStart += 1;
                     }
+
+                if (e.Key == Key.Delete || e.Key == Key.Back)
+                {
+                    e.Handled = true;
+                }
                     return;
 
                 }
@@ -201,6 +209,7 @@ namespace gxy.controls
                     date = date.Insert(((MaskedTextBox)sender).SelectionStart, " ");
                     date = date.Remove(((MaskedTextBox)sender).SelectionStart + 1, 1);
                 }
+                
                 e.Handled = true;
             }
             #endregion
