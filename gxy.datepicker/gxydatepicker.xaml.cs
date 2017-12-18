@@ -126,9 +126,9 @@ namespace gxy.controls
             }
 
             // For MultiSelect Case
-            if (((MaskedTextBox)sender).SelectionLength > 0 )
-                {
-                if (e.Key == Key.Delete || e.Key == Key.Back)
+            if (((MaskedTextBox)sender).SelectionLength > 0)
+            {
+                if (e.Key == Key.Delete || e.Key == Key.Back || (e.Key >= Key.D0 && e.Key <= Key.D9))
                 {
                     int _selectionStart = ((MaskedTextBox)sender).SelectionStart;
                     int _selectionlength = ((MaskedTextBox)sender).SelectionLength;
@@ -145,7 +145,15 @@ namespace gxy.controls
                         _selectionStart += 1;
                     }
 
-                    e.Handled = true;
+                    if (e.Key >= Key.D0 && e.Key <= Key.D9)
+                    {
+                        e.Handled = false;
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                    }
+
                     return;
                 }
 
@@ -156,7 +164,7 @@ namespace gxy.controls
                 //}
                 //    return;
 
-                }
+            }
 
             #region Logic For BackSpace Key And Delete Key
             if (e.Key == Key.Back)
