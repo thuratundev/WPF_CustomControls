@@ -128,26 +128,33 @@ namespace gxy.controls
             // For MultiSelect Case
             if (((MaskedTextBox)sender).SelectionLength > 0 )
                 {
+                if (e.Key == Key.Delete || e.Key == Key.Back)
+                {
                     int _selectionStart = ((MaskedTextBox)sender).SelectionStart;
                     int _selectionlength = ((MaskedTextBox)sender).SelectionLength;
 
 
                     for (int i = 0; i < _selectionlength; i++)
                     {
-                    
-                    if(date.ToCharArray()[_selectionStart].ToString() != "/")
-                    {
-                        date = date.Insert(_selectionStart, " ");
-                        date = date.Remove(_selectionStart + 1, 1);
-                    }
+
+                        if (date.ToCharArray()[_selectionStart].ToString() != "/")
+                        {
+                            date = date.Insert(_selectionStart, " ");
+                            date = date.Remove(_selectionStart + 1, 1);
+                        }
                         _selectionStart += 1;
                     }
 
-                if (e.Key == Key.Delete || e.Key == Key.Back)
-                {
                     e.Handled = true;
-                }
                     return;
+                }
+
+
+                //if (e.Key == Key.Delete || e.Key == Key.Back)
+                //{
+                //    e.Handled = true;
+                //}
+                //    return;
 
                 }
 
